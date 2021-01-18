@@ -8,6 +8,6 @@ Furthermore, PCI can also be treated as a plug-in module in data processing and 
 
 The experimental results in the TLS-forest benchmark and other challenging scenes (MLS and TLS data of the urban scenes) are shown as follows,
 
-<img src="https://github.com/GeoVectorMatrix/PointCloudInversion/blob/main/Images/F1.png" width="500" height="650"/><br/>
+<div align=center><img src="https://github.com/GeoVectorMatrix/PointCloudInversion/blob/main/Images/F1.png" width="500" height="650"/><br/></div>
 
 
