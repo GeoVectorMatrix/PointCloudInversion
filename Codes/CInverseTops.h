@@ -3,7 +3,7 @@ Please cite
 "Shaobo Xia, Dong Chen, Jiju Peethambaran, Pu Wang and Sheng Xu*; Point Cloud Inversion: A Novel Approach for the Localization of Trees in Forests from TLS Data, Remote Sensing."
 if this idea helps in your research.
 //////////
-- This file containts the origninal C++ code for PCI (How to inverse point clouds and how to find loacal maxmia)
+- This file containts the origninal C++ code for PCI (How to inverse point clouds and How to find loacal maxmia)
 - How to read/use the PCI code:
    CInverseTops<Point3f>    TreeTops;   // New a class
    TreeTops.VoxSize = 0.25;             // Set voxel resolution 0.25m
@@ -266,9 +266,9 @@ CInverseTops<PointT>::Save2DStemsTXT(string filename)
 	{   
 		ofileline << i+1 << " "
         		  << setprecision(15) << double(TopLocations[i].x + shiftX) << " "
-			      << setprecision(15) << double(TopLocations[i].y + shiftY) << " "
-				  << setprecision(15) << double(TopLocations[i].z + shiftZ) << " "
-				  << 0.0 << endl; //dbh
+			  << setprecision(15) << double(TopLocations[i].y + shiftY) << " "
+		          << setprecision(15) << double(TopLocations[i].z + shiftZ) << " "
+		          << 0.0 << endl; //dbh, not available here
 	}
 	ofileline.close();
 }
