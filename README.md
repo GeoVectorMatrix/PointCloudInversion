@@ -1,6 +1,6 @@
 # PointCloudInversion
 
-C++ codes for "**S.Xia, D. Chen, J. Peethambaran, P. Wang and S. Xu*, Point Cloud Inversion: A Novel Approach for the Localization of Trees in Forests from TLS Data, Remote Sensing.**" 
+C++ codes for "**S.Xia, D. Chen, J. Peethambaran, P. Wang and S. Xu, Point Cloud Inversion: A Novel Approach for the Localization of Trees in Forests from TLS Data, Remote Sensing.**" Please cite this work if this idea helps in your research. 
 
 This paper proposes a fast and easy-to-use method (Point Cloud Inversion, PCI) for localizing trees in TLS point clouds. The input for PCI is the raw point clouds and no other pre-processing steps (e.g., ground filtering, PCA-based features, noise-removal) are needed. Furthermore, PCI can also be treated as a plug-in module in data processing and may benefit other object localization tasks, such as extracting pole-like objects in urban areas.
 
