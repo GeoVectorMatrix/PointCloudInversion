@@ -124,7 +124,7 @@ CInverseTops<PointT>::GetInversedZ()
 	}
 }
 
-/**This is an exmple of Top-based method, NOT a part of PCI **/
+/**This is an exmple of the Top-based methods, NOT a part of PCI **/
 // In this version, the top-based method is based on 2D grids. 
 // However, this can also be done in 3D voxels. 
 template <typename PointT> void
