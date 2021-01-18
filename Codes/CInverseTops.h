@@ -5,7 +5,7 @@ if this idea helps in your research.
 //////////
 - This file containts the origninal C++ code for PCI (How to inverse point clouds and How to find loacal maxmia)
 - How to read/use the PCI code:
-   CInverseTops<Point3f>    TreeTops;   // New a class
+   CInverseTops<Point3f>    TreeTops;   // New an object
    TreeTops.VoxSize = 0.25;             // Set voxel resolution 0.25m
    TreeTops.SetPt(pDoc->m_vPoint._pTC); // Set input point clouds
    TreeTops.GetColumnWiseEmpty();       // Caculate the empty index, Eq.(1)
