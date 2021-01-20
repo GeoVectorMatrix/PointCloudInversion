@@ -11,4 +11,15 @@ The experimental results in the TLS-forest benchmark and other challenging scene
 <div align=center><img src="https://github.com/GeoVectorMatrix/PointCloudInversion/blob/main/Images/F1.png" width="500" height="650"/><br/></div>
 
 Please cite this work if the proposed idea helps in your research. 
-
+```
+@Article{rs13030338,
+AUTHOR = {Xia, Shaobo and Chen, Dong and Peethambaran, Jiju and Wang, Pu and Xu, Sheng},
+TITLE = {Point Cloud Inversion: A Novel Approach for the Localization of Trees in Forests from TLS Data},
+JOURNAL = {Remote Sensing},
+VOLUME = {13},
+YEAR = {2021},
+NUMBER = {3},
+ARTICLE-NUMBER = {338},
+DOI = {10.3390/rs13030338}
+}
+```
