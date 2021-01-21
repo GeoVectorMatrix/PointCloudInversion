@@ -1,6 +1,6 @@
 # PointCloudInversion
 
-C++ codes for "**S.Xia, D. Chen, J. Peethambaran, P. Wang and S. Xu\*, Point Cloud Inversion: A Novel Approach for the Localization of Trees in Forests from TLS Data, Remote Sensing.**"
+C++ codes for "**Xia, S.; Chen, D.; Peethambaran, J.; Wang, P.; Xu, S\*. Point Cloud Inversion: A Novel Approach for the Localization of Trees in Forests from TLS Data. Remote Sens. 2021, 13, 338. https://doi.org/10.3390/rs13030338.**"
 
 Point Cloud Inversion (PCI) is a fast and easy-to-use method for localizing trees in TLS point clouds. The input for PCI is the raw point clouds and no other pre-processing steps (e.g., ground filtering, PCA-based features, noise-removal) are needed. This main contribution of PCI is visually enhancing the pole-like objects in point clouds, and this also making the top-based object localization methods (without model-fitting or PCA-based features) available for TLS data.
 
