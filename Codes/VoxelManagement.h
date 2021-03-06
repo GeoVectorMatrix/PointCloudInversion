@@ -16,7 +16,7 @@ class CSquare3D
 	 T        RecXmax;        
 	 T        RecYmax;
 	 T        RecZmax;
-	vector<unsigned int>      IdArray;       //一个区域的所有数据点的ID  数据最大
+	vector<unsigned int>      IdArray;      
 };
 
 template <typename T> 
@@ -47,34 +47,25 @@ public:
 	CSquare3D<T>      *Square3D;
 public:
 	T                    _cell_size;
-	unsigned int        globleRow;                    //行数
-	unsigned int        globleColum;                  //列数目
-	unsigned int        globleZHeight;                //高程格网数目
-	bool                is_divided;  //是否分割
+	unsigned int        globleRow;                   
+	unsigned int        globleColum;                
+	unsigned int        globleZHeight;               
+	bool                is_divided; 
 
 public:
-	void Do_Grid(const vector<PointT> &pt,const vector<unsigned int> &ids); //需要输入每个点特定的iD
-	void Do_Grid(const vector<PointT> &pt);  //默认ID为序号
+	void Do_Grid(const vector<PointT> &pt,const vector<unsigned int> &ids);
+	void Do_Grid(const vector<PointT> &pt);  
 public:
-	unsigned int           GetCellOfXYZ(T X,T Y,T Z);                      //输入，xyZ，获得对应格网的数组位置
-	vector<unsigned int>   GetCellOfXYZ(T X,T Y,T Z,unsigned int r_grid);  //输入xyZ 获得所在格网，以及格网周围r个格网的 数组索引
-	vector<unsigned int>   GetCellOfXYZ(T X,T Y,T Z,T r_grid);             //输入xyZ 获得所在格网，以及该点周围，半径为r的所有格网点 数组索引
-	//
-	/************************************************************************/
-	/*       由 ij  J得到的是数组中的索引                                     */
-	/************************************************************************/
+	unsigned int           GetCellOfXYZ(T X,T Y,T Z);                     
+	vector<unsigned int>   GetCellOfXYZ(T X,T Y,T Z,unsigned int r_grid);  
+	vector<unsigned int>   GetCellOfXYZ(T X,T Y,T Z,T r_grid);            
 	unsigned int getindexOfijf(unsigned int I, unsigned int J, unsigned int F);
 	void         getIJF(unsigned int &I,unsigned int &J,unsigned int &F, unsigned int longIdx);
 public:
 	T org_x;    T org_y; T org_z; 
 	T  top_x;   T top_y; T top_z;
 private:
-	//设置边界 保证对最小空间进行分割
 	void translate(const vector<PointT> &pt); 
-	//
-	/************************************************************************/
-	/* 给出坐标x y     获得所在的数据块  i  j                               */
-	/************************************************************************/
 	void getijffromxyz(T X,T Y,T Z,unsigned int &i,unsigned int &j,unsigned int &f);
 
 };
@@ -114,18 +105,15 @@ CVoxelManagement<typename T, typename PointT>::Do_Grid(const vector<PointT> &pt,
 	{
 		return;
 	}
-	translate(pt);// 找边界
-	//获得分割的结果  x  y方向分割数目  即  行数 列数 
+	translate(pt);
 	globleColum  =  unsigned int( ceil(top_x/_cell_size) ); //x===col
 	globleRow    =  unsigned int( ceil(top_y/_cell_size) );  //y==row
 	globleZHeight =  unsigned int( ceil(top_z/_cell_size) );
 	if(globleColum==0||globleRow==0||globleZHeight==0)
 	{
-		return; //如果输入的间隔比点云的范围还大了，显然不能做格网了
+		return; 
 	}
-	//获得数组的大小
 	Square3D=new CSquare3D<T>[globleRow*globleColum*globleZHeight];
-	//进行数据分割
 	unsigned int tmi=0;   unsigned int tmj=0;	unsigned int tmt=0;
 	for (unsigned int i=0;i<pt.size();i++)
 	{
@@ -134,7 +122,6 @@ CVoxelManagement<typename T, typename PointT>::Do_Grid(const vector<PointT> &pt,
 		tmt=unsigned int(floor((pt[i].z-org_z)/_cell_size));
 		Square3D[tmt*globleColum*globleRow+tmi*globleColum+tmj].IdArray.push_back(ids[i]);
 	}
-	//格网边界
 	for (unsigned int t=0;t<globleZHeight;t++)
 	{
 		for (unsigned int i=0;i<globleRow;i++)
@@ -160,18 +147,15 @@ CVoxelManagement<typename T, typename PointT>::Do_Grid(const vector<PointT> &pt)
 	{
 		return;
 	}
-	translate(pt);// 找边界
-	//获得分割的结果  x  y方向分割数目  即  行数 列数 
+	translate(pt);
 	globleColum  =  unsigned int( ceil(top_x/_cell_size) ); //x===col
 	globleRow    =  unsigned int( ceil(top_y/_cell_size) );  //y==row
 	globleZHeight =  unsigned int( ceil(top_z/_cell_size) );
 	if(globleColum==0||globleRow==0||globleZHeight==0)
 	{
-		return; //如果输入的间隔比点云的范围还大了，显然不能做格网了
+		return; 
 	}
-	//获得数组的大小
 	Square3D=new CSquare3D<T>[globleRow*globleColum*globleZHeight];
-	//进行数据分割
 	unsigned int tmi=0;   unsigned int tmj=0;	unsigned int tmt=0;
 	for (unsigned int i=0;i<pt.size();i++)
 	{
@@ -180,7 +164,6 @@ CVoxelManagement<typename T, typename PointT>::Do_Grid(const vector<PointT> &pt)
 		tmt=unsigned int(floor((pt[i].z-org_z)/_cell_size));
 		Square3D[tmt*globleColum*globleRow+tmi*globleColum+tmj].IdArray.push_back(i);
 	}
-	//格网边界
 	for (unsigned int t=0;t<globleZHeight;t++)
 	{
 		for (unsigned int i=0;i<globleRow;i++)
@@ -199,8 +182,6 @@ CVoxelManagement<typename T, typename PointT>::Do_Grid(const vector<PointT> &pt)
 	is_divided=true;
 }
 
-//////////////////////////////////////////////////////////////////////////
-////设置边界 保证对最小空间进行分割
 template <typename T, typename PointT> void
 CVoxelManagement<typename T, typename PointT>::translate(const vector<PointT> &pt)
 {
@@ -243,12 +224,10 @@ CVoxelManagement<typename T, typename PointT>::translate(const vector<PointT> &p
 	org_z=MINZ;
 	//
 	top_x=MaxX-MINX+0.0001;
-	top_y=MaxY-MINY+0.0001;  //增加一个扰动，确保分割稳定性
-	top_z=MaxZ-MINZ+0.0001;  //增加一个扰动，确保分割稳定性
+	top_y=MaxY-MINY+0.0001;  
+	top_z=MaxZ-MINZ+0.0001;  
 }
 
-//////////////////////////////////////////////////////////////////////////
-////设置边界 保证对最小空间进行分割
 template <typename T, typename PointT> unsigned int
 CVoxelManagement<typename T, typename PointT>::getindexOfijf(unsigned int I,unsigned int J,unsigned int F)
 {
@@ -304,7 +283,6 @@ CVoxelManagement<typename T, typename PointT>:: getijffromxyz(T X,T Y,T Z,unsign
 	i=unsigned int(floor((Y-org_y)/_cell_size));
 	j=unsigned int(floor((X-org_x)/_cell_size));
 	f=unsigned int(floor((Z-org_z)/_cell_size));
-	// 下面防止代码奔溃，做了强制的范围约束，事实上，自己用不会出现这些情况
 	if ((X-org_x)>top_x)
 	{
 		j=unsigned int(floor(top_x/_cell_size));
@@ -332,9 +310,7 @@ CVoxelManagement<typename T, typename PointT>:: getijffromxyz(T X,T Y,T Z,unsign
 	}
 }
 
-//////////////////////////////////////////////////////////////////////////
-// 为外部 访问格网 提供接口 
-//////////////////////////////////////////////////////////////////////////
+
 template <typename T, typename PointT> 	unsigned int
 CVoxelManagement<typename T, typename PointT>:: GetCellOfXYZ(T X,T Y,T Z)
 {
@@ -342,15 +318,13 @@ CVoxelManagement<typename T, typename PointT>:: GetCellOfXYZ(T X,T Y,T Z)
 	getijffromxyz(X,Y,Z,ix,iy,i_f);
 	return(getindexOfijf(ix,iy,i_f));
 }
-//////////////////////////////////////////////////////////////////////////
-////输入xy 获得所在格网，以及格网周围r个格网的 数组索引
-//***
+
 template <typename T, typename PointT> vector<unsigned int>   
 CVoxelManagement<typename T, typename PointT>::GetCellOfXYZ(T X,T Y,T Z,unsigned int r_grid)
 {
 	vector<unsigned int>  ids;
 	//
-	unsigned int the_ID=GetCellOfXYZ(X,Y,Z); //该点自身的id
+	unsigned int the_ID=GetCellOfXYZ(X,Y,Z); 
 	//
 	unsigned int ix=0;
 	unsigned int iy=0;
@@ -413,9 +387,7 @@ CVoxelManagement<typename T, typename PointT>::GetCellOfXYZ(T X,T Y,T Z,unsigned
 	}
 	return ids;
 }
-//////////////////////////////////////////////////////////////////////////
-////输入xy 获得所在格网，以及该点周围，半径为r的所有格网点 数组索引
-//*** 注意 这里不是严格的圆半径，二是格网半径 圆半径建议采用ANN 
+
 template <typename T, typename PointT> vector<unsigned int>   
 CVoxelManagement<typename T, typename PointT>:: GetCellOfXYZ(T X,T Y,T Z,T r_grid)
 {
@@ -428,12 +400,10 @@ CVoxelManagement<typename T, typename PointT>:: GetCellOfXYZ(T X,T Y,T Z,T r_gri
 	T rightPointZ =ptIN.z+r_grid;
 
 	unsigned int imax,jmax,tmax,imin,jmin,tmin;
-	//得到 区间范围  
 	getijfromxyz(leftupPointX,leftupPointY, leftupPointZ, imin, jmin,tmin);
 	getijfromxyz(rightPointX,  rightPointY, rightPointZ, imax, jmax,tmax);
 
 	vector<unsigned int>  tempSave;
-	//依据获得的区域  索引分割的区域
 	for (unsigned int t=tmin;t<=tmax;t++)
 	{
 		for (unsigned int i=imin;i<=imax;i++)
