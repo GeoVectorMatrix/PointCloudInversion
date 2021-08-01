@@ -71,7 +71,6 @@ public:
 	vector<unsigned int>   GetCellOfXY(T X,T Y,T r_grid); 
 	unsigned int getindexOfij(unsigned int I, unsigned int J);
 	int          getindexOfijSelf(unsigned int I,unsigned int J); // Boundary warning
-	void         getIJfromLong(unsigned int &I, unsigned int &J, unsigned int longIdx);
 
 private:
 	T org_x;    T org_y; 
@@ -297,24 +296,6 @@ CGridManagement<typename T, typename PointT>::getindexOfijSelf(unsigned int I, u
 	return I*globleColum + J;
 }
 
-
-
-template <typename T, typename PointT> void
-CGridManagement<typename T, typename PointT>::getIJfromLong(unsigned int &I, unsigned int &J, unsigned int longIdx)
-{
-	if (longIdx < 0 )
-	{
-		longIdx = 0; // no-max than
-	}
-	if (longIdx > globleRow*globleColum - 1)
-	{
-		longIdx = globleRow*globleColum - 1; // no-max than
-	}
-	double rm = double(longIdx);
-	I = unsigned int(floor(rm / double(globleColum)));
-	//
-	J = int(rm - double(I*globleColum));
-}
 
 //////////////////////////////////////////////////////////////////////////
 template <typename T, typename PointT> void

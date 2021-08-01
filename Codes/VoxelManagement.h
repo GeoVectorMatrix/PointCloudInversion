@@ -60,7 +60,6 @@ public:
 	vector<unsigned int>   GetCellOfXYZ(T X,T Y,T Z,unsigned int r_grid);  
 	vector<unsigned int>   GetCellOfXYZ(T X,T Y,T Z,T r_grid);            
 	unsigned int getindexOfijf(unsigned int I, unsigned int J, unsigned int F);
-	void         getIJF(unsigned int &I,unsigned int &J,unsigned int &F, unsigned int longIdx);
 public:
 	T org_x;    T org_y; T org_z; 
 	T  top_x;   T top_y; T top_z;
@@ -263,19 +262,6 @@ CVoxelManagement<typename T, typename PointT>::getindexOfijf(unsigned int I,unsi
 	return  theID;
 }
 
-template <typename T, typename PointT> void
-CVoxelManagement<typename T, typename PointT>::getIJF(unsigned int &I, unsigned int &J, unsigned int &F, unsigned int longIdx)
-{
-	if (longIdx > globleRow*globleColum*globleZHeight - 1)
-	{
-		longIdx = globleRow*globleColum*globleZHeight - 1;
-	}
-	F = unsigned int (floor(double(longIdx) / double(globleRow*globleColum)));
-	double rm = double(longIdx) - double(F*globleRow*globleColum);
-	I = unsigned int (floor(rm / double(globleColum)));
-	//
-	J = int(rm - double(I*globleColum));
-}
 //////////////////////////////////////////////////////////////////////////
 template <typename T, typename PointT> void
 CVoxelManagement<typename T, typename PointT>:: getijffromxyz(T X,T Y,T Z,unsigned int &i,unsigned int &j,unsigned int &f)
